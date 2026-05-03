@@ -1,6 +1,6 @@
 def add_numbers(a, b):
-    # Intentional bug: missing parenthesis in print statement
-    print("The sum is: " + str(a + b)
+    # Intentional bug: missing parenthesis in print statement - FIXED
+    print("The sum is: " + str(a + b))
     return a + b
 
 if __name__ == '__main__':
