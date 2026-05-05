@@ -1,0 +1,27 @@
+name: Docker CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build the Docker Image
+      run: |
+        cd 16
+        docker build -t ghcr.io/${{ github.actor }}/todo-app-16:latest .
+
+    - name: Push to GitHub Registry
+      run: docker push ghcr.io/${{ github.actor }}/todo-app-16:latest
