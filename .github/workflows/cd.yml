@@ -19,9 +19,7 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build the Docker Image
-      run: |
-        cd 16
-        docker build -t ghcr.io/${{ github.actor }}/todo-app-16:latest .
+      run: docker build -t ghcr.io/${{ github.actor }}/todo-app-16:latest ./16
 
     - name: Push to GitHub Registry
       run: docker push ghcr.io/${{ github.actor }}/todo-app-16:latest
